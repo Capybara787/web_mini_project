@@ -5,11 +5,6 @@ from werkzeug.utils import secure_filename
 
 import base64
 
-# create a web application for a pet adoption page. 
-# The page should have a login page, a page to register a new user, a page to list pets, add pets, edit pets and delete pets.
-# To load the pets, read data from db.db file. 
-# users should only be able to see index.html if they are logged in.
-
 app = flask.Flask(__name__)
 app.secret_key = 'batman'
 
@@ -64,15 +59,23 @@ def add_pet():
         age = request.form['age']
         fee = request.form['fee']
         description = request.form['description']
-        image1 = request.files['image1'].read()
-        image2 = request.files['image2'].read()
-        image3 = request.files['image3'].read()
-        # Save the images as blobs in the database
+        image1 = request.files['image1']
+        image2 = request.files['image2']
+        image3 = request.files['image3']
         c.execute("INSERT INTO pets (name, type, sex, age, fee, writeup, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?)", 
                   (name, type, sex, age, fee, description, session['user_id']))
-        c.execute("INSERT INTO pet_images (pet_id, image1, image2, image3) VALUES (?, ?, ?, ?)", (c.lastrowid, image1, image2, image3))
-        # c.execute("INSERT INTO pet_images (pet_id, image1, image2, image3) VALUES (?, ?, ?, ?)", 
-        #          (c.lastrowid, image1.filename, image2.filename, image3.filename))
+                
+        # create a new folder with pet_id as folder name and upload image1, image2, image3 to that folder
+        os.mkdir('static/images/' + str(c.lastrowid))
+        image1.save('static/images/' + str(c.lastrowid) + '/image1.jpg')
+        image2.save('static/images/' + str(c.lastrowid) + '/image2.jpg')
+        image3.save('static/images/' + str(c.lastrowid) + '/image3.jpg')
+
+        # save the image paths in the database
+        c.execute("INSERT INTO pet_images (pet_id, image1, image2, image3) VALUES (?, ?, ?, ?)", 
+                  (c.lastrowid, 'static/images/' + str(c.lastrowid) + '/image1.jpg', 
+                   'static/images/' + str(c.lastrowid) + '/image2.jpg', 
+                   'static/images/' + str(c.lastrowid) + '/image3.jpg'))
         conn.commit()
         return redirect('/')
     return render_template('add.html')

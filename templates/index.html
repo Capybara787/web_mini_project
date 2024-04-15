@@ -21,7 +21,8 @@
         <div class="pet-list">
             {% for pet in pets %}
             <div class="pet-card">
-                    <img src= "data:image/jpeg;base64,{{pet_images[0]}}">
+                <!load image from static/images/pet_id>
+                <img src="{{ url_for('static', filename='images/' + pet[0] + '.jpg') }}" alt="pet image">
                 <h2>{{ pet[1] }}</h2>
                 <p>Type: {{ pet[2] }}</p>
                 <p>Sex: {{ pet[3] }}</p>
