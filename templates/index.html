@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Adoption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('add_pet') }}">Add Pet</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>    
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Available Pets</h1>
+        <div class="pet-list">
+            {% for pet in pets %}
+            <div class="pet-card">
+                    <img src= "data:image/jpeg;base64,{{pet_images[0]}}">
+                <h2>{{ pet[1] }}</h2>
+                <p>Type: {{ pet[2] }}</p>
+                <p>Sex: {{ pet[3] }}</p>
+                <p>Age: {{ pet[4] }}</p>
+                <p>Adoption Fee: ${{ pet[5] }}</p>
+                <p>{{ pet[6] }}</p>
+                <form action="{{ url_for('interested', pet_id=pet[0]) }}" method="post">
+                    <button type="submit">I'm Interested</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pet Adoption</p>
+    </footer>
+</body>
+</html>
