@@ -22,7 +22,7 @@
             {% for pet in pets %}
             <div class="pet-card">
                 <!load image from static/images/pet_id>
-                <img src="{{ url_for('static', filename='images/' + pet[0] + '.jpg') }}" alt="pet image">
+                <img src="{{ url_for('static', filename='images/' + 'pet[0]' + '.jpg') }}" alt="pet image">
                 <h2>{{ pet[1] }}</h2>
                 <p>Type: {{ pet[2] }}</p>
                 <p>Sex: {{ pet[3] }}</p>
