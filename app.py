@@ -15,6 +15,7 @@ c = conn.cursor()
 def index():
     pets = c.execute("SELECT * from pets").fetchall()
     pet_images = c.execute("SELECT * from pet_images").fetchall()
+    print(pet_images)
     return render_template('index.html', pets=pets, pet_images=pet_images)
 
 @app.route('/login', methods=['GET', 'POST'])
