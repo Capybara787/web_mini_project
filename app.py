@@ -85,7 +85,7 @@ def interested(pet_id):
     
     if request.method == 'POST':
         # Check if the user has already expressed interest in this pet
-        existing_interest = c.execute("SELECT * FROM interested WHERE pet_id=? AND user_id=?", (pet_id, session['user_id'])).fetchone()
+        existing_interest = c.execute("SELECT * FROM interested_users WHERE pet_id=? AND user_id=?", (pet_id, session['user_id'])).fetchone()
         if existing_interest:
             return render_template('interested.html', pet_id=pet_id, error='You have already expressed interest in this pet.')
         

@@ -1,4 +1,4 @@
-<!DOCTYPE ht
+<!DOCTYPE html>
 <html>
 <head>
     <title>Pet Adoption</title>
@@ -23,11 +23,11 @@
             <div class="pet-card">
                     <img src="/static/images/{{pet[0]}}/image1.jpg" alt="Error: Image missing">
                 <h2>{{ pet[1] }}</h2>
-                <p>Type: {{ pet[2] }}</p>
-                <p>Sex: {{ pet[3] }}</p>
-                <p>Age: {{ pet[4] }}</p>
-                <p>Adoption Fee: ${{ pet[5] }}</p>
-                <p>{{ pet[6] }}</p>
+                <p>Type: {{ pet[6] }}</p>
+                <p>Sex: {{ pet[2] }}</p>
+                <p>Age: {{ pet[3] }}</p>
+                <p>Adoption Fee: ${{ pet[4] }}</p>
+                <p>{{ pet[5] }}</p>
                 <form action="{{ url_for('interested', pet_id=pet[0]) }}" method="post">
                     <button type="submit">I'm Interested</button>
                 </form>
