@@ -83,19 +83,19 @@ def interested(pet_id):
     if 'user_id' not in session:
         return redirect('/login')
     
+    pet = c.execute("SELECT * FROM pets WHERE id=?", (pet_id,)).fetchall()[0]
     if request.method == 'POST':
         # Check if the user has already expressed interest in this pet
-        existing_interest = c.execute("SELECT * FROM interested_users WHERE pet_id=? AND user_id=?", (pet_id, session['user_id'])).fetchone()
+        existing_interest = c.execute("SELECT * FROM interested_users WHERE pet_id=? AND users_id=?", (pet_id, session['user_id'])).fetchone()
         if existing_interest:
-            return render_template('interested.html', pet_id=pet_id, error='You have already expressed interest in this pet.')
+            return render_template('interested.html',pet=pet, pet_id=pet_id, error='You have already expressed interest in this pet.')
         
         # Insert the new interest record into the database
-        c.execute("INSERT INTO interested (pet_id, user_id) VALUES (?, ?)", (pet_id, session['user_id']))
+        c.execute("INSERT INTO interested_users (pet_id, users_id) VALUES (?, ?)", (pet_id, session['user_id']))
         conn.commit()
         return redirect('/')
     
     # Fetch the pet information to display on the page
-    pet = c.execute("SELECT * FROM pets WHERE id=?", (pet_id,)).fetchone()
     return render_template('interested.html', pet=pet)
 
 
