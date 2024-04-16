@@ -1,0 +1,15 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>My Pets</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">   
+</head>
+<body>
+    <h1>My Pets</h1>
+    <p>My pets:</p>
+    {% for pets in pets %}
+        <p>{{ pets [1] }} has interested users {{interested_users}}</p>
+    {% endfor %}
+</body>
+</html>
+

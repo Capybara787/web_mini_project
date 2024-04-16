@@ -1,1 +1,1 @@
-## STUPID PROJECT ISTG
+Funni web project

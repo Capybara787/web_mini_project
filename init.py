@@ -18,3 +18,6 @@ def init():
     cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table';")
     print(cursor.fetchall())
     conn.close()
+
+init()
+

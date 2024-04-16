@@ -16,7 +16,9 @@ def index():
     pets = c.execute("SELECT * from pets").fetchall()
     pet_images = c.execute("SELECT * from pet_images").fetchall()
     print(pet_images)
-    return render_template('index.html', pets=pets, pet_images=pet_images)
+    username = c.execute("SELECT name from users WHERE id=?", (session.get('user_id'),)).fetchone()[0] if 'user_id' in session else None
+    print(username)
+    return render_template('index.html', pets=pets, pet_images=pet_images, username=username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -97,6 +99,19 @@ def interested(pet_id):
     
     # Fetch the pet information to display on the page
     return render_template('interested.html', pet=pet)
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/')
+
+@app.route('/my_pets')
+def my_pets():
+    if 'user_id' not in session:
+        return redirect('/login')
+    pets = c.execute("SELECT * from pets WHERE owner_id=?", (session['user_id'],)).fetchall()
+    interested_users = c.execute("SELECT * from interested_users WHERE users_id=?", (session['user_id'],)).fetchall()
+    return render_template('my_pets.html', pets=pets, interested_users=interested_users)
 
 
 if __name__ == '__main__':
