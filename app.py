@@ -1,5 +1,5 @@
 import flask, os, sqlite3
-from flask import render_template, request, redirect, url_for, session 
+from flask import render_template, request, redirect, url_for, session
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
@@ -100,7 +100,7 @@ def interested(pet_id):
     # Fetch the pet information to display on the page
     return render_template('interested.html', pet=pet)
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 def logout():
     session.pop('user_id', None)
     return redirect('/')

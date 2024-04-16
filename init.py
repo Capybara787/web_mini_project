@@ -1,4 +1,5 @@
 import sqlite3 
+import os 
 
 def init():
     conn= sqlite3.connect('db.db')
@@ -19,5 +20,10 @@ def init():
     print(cursor.fetchall())
     conn.close()
 
+def purge():
+    os.chdir('static/images')
+    os.system('rm -r .')
+
 init()
+purge()
 
