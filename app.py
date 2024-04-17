@@ -15,7 +15,7 @@ c = conn.cursor()
 def index():
     pets = c.execute("SELECT * from pets").fetchall()
     pet_images = c.execute("SELECT * from pet_images").fetchall()
-    username = c.execute("SELECT name from users WHERE id=?", (session.get('user_id'),)).fetchone()[0] if 'user_id' in session else None
+    username = c.execute("SELECT name FROM users WHERE id=?", (session.get('user_id'),)).fetchone()[0] if 'user_id' in session else None
     return render_template('index.html', pets=pets, pet_images=pet_images, username=username)
 
 @app.route('/login', methods=['GET', 'POST'])

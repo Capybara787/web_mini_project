@@ -10,10 +10,10 @@
             <ul>
                 <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li><a href="{{ url_for('add_pet') }}">Add Pet</a></li>
-                <li><a href="{{ url_for('my_pets') }} ">My Pets</a></li>
+                <li><a href="{{ url_for('my_pets')}} ">My Pets</a></li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li>  
-                    {% if not username %}
+                    {% if username == None %}
                     <li> Not logged in</li>
                     {% else %}
                     <li> Logged in as: {{ username }}</li>
