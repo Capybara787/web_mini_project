@@ -12,6 +12,7 @@ pip install -r requirements.txt
 ```
 3. run app (make sure you are in the correct directory!) 
 ```bash
+cd web_mini_project
 python3 init.py
 python3 app.py
 ```

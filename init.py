@@ -21,9 +21,10 @@ def init():
     conn.close()
 
 def purge():
-    os.chdir('static/images/')
-    os.system('rm -rf *')
+    if os.path.exists('static/images/'):
+        os.chdir('static/images/')
+        os.system('rm -rf *')
 
 init()
 purge()
-
+os.mkdir('static/images/')
