@@ -2,13 +2,29 @@
 <html>
 <head>
     <title>My Pets</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">   
-</head>
+        
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+     </head>
+
+
 <body>
+    <header> 
+        <nav>
+            <ul>
+                <li><a href = "index.html">Home</a></li>
+                <li><a href = "my_pets.html">My Pets</a></li>
+                <li><a href = "add_pet.html">Add Pet</a></li>
+                <li><a href = "interested_users.html">Interested Users</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>My Pets</h1>
     <p>My pets:</p>
     {% for pets in pets %}
-        <p>{{ pets [1] }} has interested users {{interested_users}}</p>
+        <ul> 
+            <li> <img src = "static/images/{{ pets [0] }}/image1.jpg" alt = "Error" </li>
+            <li> {{pets [1]}} has interested users {{interested_users}} </li>
+        </ul>  
     {% endfor %}
 </body>
 </html>

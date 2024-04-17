@@ -21,8 +21,8 @@ def init():
     conn.close()
 
 def purge():
-    os.chdir('static/images')
-    os.system('rm -r .')
+    os.chdir('static/images/')
+    os.system('rm -rf *')
 
 init()
 purge()
