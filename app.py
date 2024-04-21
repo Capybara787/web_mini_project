@@ -1,12 +1,7 @@
 import flask, os, sqlite3
 from flask import render_template, request, redirect, url_for, session
-from flask import send_from_directory
-from werkzeug.utils import secure_filename
-
-import base64
 
 app = flask.Flask(__name__)
-app.secret_key = 'batman'
 
 conn = sqlite3.connect('db.db', check_same_thread=False)
 c = conn.cursor()
