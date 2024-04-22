@@ -20,5 +20,7 @@ python app.py
 
 ### Contribution guide: 
 1. fork the repo
-2. magic
-3. create a PR 
+2. clone repo 
+3. make changes
+4. push changes and create a pull request
+5. profit
