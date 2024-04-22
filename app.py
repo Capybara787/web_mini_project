@@ -105,7 +105,8 @@ def my_pets():
         return redirect('/login')
     pets = c.execute("SELECT * from pets WHERE owner_id=?", (session['user_id'],)).fetchall()
     interested_users = c.execute("SELECT name, contact FROM interested_users JOIN users ON users.id=interested_users.users_id WHERE pet_id=?", (session['user_id'],)).fetchall()
-    return render_template('my_pets.html', pets=pets, interested_users=interested_users)
+    username = c.execute("SELECT name FROM users WHERE id=?", (session.get('user_id'),)).fetchone()[0] if 'user_id' in session else None
+    return render_template('my_pets.html', pets=pets, interested_users=interested_users, username=username)
 
 
 if __name__ == '__main__':
