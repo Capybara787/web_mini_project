@@ -2,6 +2,7 @@ import flask, os, sqlite3
 from flask import render_template, request, redirect, url_for, session
 
 app = flask.Flask(__name__)
+app.secret_key = 'batman' 
 
 conn = sqlite3.connect('db.db', check_same_thread=False)
 c = conn.cursor()
@@ -103,7 +104,7 @@ def my_pets():
     if 'user_id' not in session:
         return redirect('/login')
     pets = c.execute("SELECT * from pets WHERE owner_id=?", (session['user_id'],)).fetchall()
-    interested_users = c.execute("SELECT name FROM interested_users JOIN users ON users.id=interested_users.users_id WHERE pet_id=?", (session['user_id'],)).fetchall()
+    interested_users = c.execute("SELECT name, contact FROM interested_users JOIN users ON users.id=interested_users.users_id WHERE pet_id=?", (session['user_id'],)).fetchall()
     return render_template('my_pets.html', pets=pets, interested_users=interested_users)
 
 

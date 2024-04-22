@@ -20,11 +20,13 @@
     </header>
     <h1>My Pets</h1>
     <p>My pets:</p>
-    {% for pets in pets %}
-        <ul> 
-            <li> <img src = "static/images/{{ pets [0] }}/image1.jpg" alt = "Error" </li>
-            <li> {{pets [1]}} has interested users {{interested_users}} </li>
-        </ul>  
+        <div class = 'pet-card'>
+            {% for pets in pets %}
+            <h2>{{pets [1]}}</h2>
+            <img src = "static/images/{{ pets [0] }}/image1.jpg" alt = "Error">
+            {% for p in interested_users %}
+            <p>{{p[0]}} is interested in {{pets[1]}}, their number is {{p[1]}}</p>
+            {% endfor %}
     {% endfor %}
 </body>
 </html>
